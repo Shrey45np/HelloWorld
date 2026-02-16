@@ -1,0 +1,23 @@
+name: Multi-Language CI
+on: [push, pull_request]
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - [cite_start]run: pip install -r requirements.txt # Uses requirements from Ex 4 [cite: 238]
+      - run: pytest -v
+
+  javascript-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - [cite_start]run: npm install # Installs Jest [cite: 247]
+      - [cite_start]run: npm test    # Runs stringUtils.test.js [cite: 248]
